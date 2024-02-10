@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using ExemploMediator.API.Mediator.Events;
+using MediatR;
 
 namespace ExemploMediator.API.Mediator.Commands
 {
@@ -26,6 +27,12 @@ namespace ExemploMediator.API.Mediator.Commands
 
             //chama eventos
             _logger.LogInformation("Enviado eventos");
+
+            _mediator.Publish(new OrdemProducaoIniciadoEvent
+            {
+                CodigoOP = request.CodigoOP,
+                IdOP = request.IdOP,
+            }, cancellationToken);
 
             _logger.LogInformation("OP Iniciada");
 
